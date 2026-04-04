@@ -28,7 +28,7 @@ export default function App() {
 
     return {
       ...base,
-      modeName: "Fun",
+      modeName: "Personal",
       accent: "#22C55E",
       accent2: "#2B6CFF",
       bg1: "#061A12",
