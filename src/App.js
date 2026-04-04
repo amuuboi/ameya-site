@@ -16,7 +16,7 @@ export default function App() {
     if (mode === "pro") {
       return {
         ...base,
-        modeName: "Professional",
+        modeName: "Offer",
         accent: "#2B6CFF",
         accent2: "#22C55E",
         bg1: "#071028",
