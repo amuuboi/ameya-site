@@ -1,0 +1,25 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/ameya-site
+            git pull origin main
+            npm install
+            npm run build
+            # Deploying to the Nginx path defined in your setup [cite: 13]
+            sudo cp -r build/* /var/www/ameyabhat.me/ameya-site/build/
+            sudo systemctl reload nginx
