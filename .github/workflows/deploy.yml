@@ -22,6 +22,5 @@ jobs:
       npm install [cite: 19]
       npm run build [cite: 19]
       # Using -rf to ensure the build directory is overwritten without prompts
-      sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/ 
-      sudo systemctl reload nginx [cite: 19]           cd ~/ameya-site
-           
+      sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/
+      sudo systemctl reload nginx [cite: 19]
