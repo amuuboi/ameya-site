@@ -17,10 +17,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 2205
           script: |
-           cd ~/ameya-site
-           git pull origin main
-           npm install
-           npm run build
-           # Use sudo without a password thanks to the visudo change
-           sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/
-           sudo systemctl reload nginx
+      cd ~/ameya-site
+      git pull origin main [cite: 19]
+      npm install [cite: 19]
+      npm run build [cite: 19]
+      # Using -rf to ensure the build directory is overwritten without prompts
+      sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/ 
+      sudo systemctl reload nginx [cite: 19]           cd ~/ameya-site
+           

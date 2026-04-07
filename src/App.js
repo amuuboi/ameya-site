@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+\import React, { useMemo, useState } from "react";
 
 export default function App() {
   const [mode, setMode] = useState("pro"); // "pro" | "fun"
@@ -16,7 +16,7 @@ export default function App() {
     if (mode === "pro") {
       return {
         ...base,
-        modeName: "Test3",
+        modeName: "Test4",
         accent: "#2B6CFF",
         accent2: "#22C55E",
         bg1: "#071028",
