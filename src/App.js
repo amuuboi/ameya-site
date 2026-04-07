@@ -1,4 +1,4 @@
-\import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 export default function App() {
   const [mode, setMode] = useState("pro"); // "pro" | "fun"
