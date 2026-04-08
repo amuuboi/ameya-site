@@ -33,7 +33,8 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: center; /* This centers the links since the brand is gone */
+  justify-content: space-between; /* This pushes name to left and links to right */
+  align-items: center;
   padding: 15px 0;
 }
 
@@ -42,6 +43,7 @@ body {
   font-weight: bold;
   color: var(--primary-green);
   text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
 .nav-links {
