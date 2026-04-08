@@ -33,8 +33,7 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center; /* This centers the links since the brand is gone */
   padding: 15px 0;
 }
 
