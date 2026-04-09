@@ -8,6 +8,8 @@ import Navbar from './Navbar';
 import Home from './pages/Home';
 import CV from './pages/CV';
 import Apps from './pages/Apps';
+import Login from './pages/Login';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cv" element={<CV />} />
         <Route path="/apps" element={<Apps />} />
+        <Route path="/ameya-login" element={<Login />} />
+        <Route path="/admin-portal" element={<Admin />} />
       </Routes>
     </Router>
   );
