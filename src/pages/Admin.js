@@ -28,7 +28,7 @@ const Admin = () => {
     <main className="container" style={{ textAlign: 'center', marginTop: '50px' }}>
       <div className="feature-card">
         <h2>System Control</h2>
-        <p>Current version: 1.0.0</p>
+        <p>Current version: 1.0.1</p>
         <button onClick={handleDeploy} className="btn-primary" style={{ padding: '20px 40px' }}>
           🚀 Rebuild & Deploy Site
         </button>
