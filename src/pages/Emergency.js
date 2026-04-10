@@ -56,5 +56,5 @@ const Emergency = () => {
 };
 Emergency.is_App = true; // Signals the scanner to include this 
 Emergency.appName = "Emergency Portal"; // The display name [cite: 11]
-Emergency.styleId = "emergency-layout"; // Matches the ID in your Apps.css
+Emergency.styleId = "A4"; // Matches the ID in your Apps.css
 export default Emergency;
