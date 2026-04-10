@@ -32,8 +32,8 @@ const Emergency = () => {
                     {contacts.map((c, index) => (
                         <p key={index}><strong>{c.name}</strong> - {c.num}</p>
                     ))}
-                    <button 
-                        onClick={() => { setShowContacts(false); setPassword(''); }} 
+                    <button
+                        onClick={() => { setShowContacts(false); setPassword(''); }}
                         className="btn-primary"
                     >
                         Lock
@@ -41,7 +41,7 @@ const Emergency = () => {
                 </div>
             ) : (
                 <form onSubmit={handlePasswordSubmit}>
-                    <input 
+                    <input
                         type="password"
                         placeholder="Enter Password"
                         value={password}
@@ -54,7 +54,10 @@ const Emergency = () => {
         </div>
     );
 };
-Emergency.is_App = true; // Signals the scanner to include this 
-Emergency.appName = "Emergency Portal"; // The display name [cite: 11]
-Emergency.styleId = "A4"; // Matches the ID in your Apps.css
+
+// ── Auto-detection metadata ────────────────────────────────────────────────────
+Emergency.is_App  = true;                // Signals the scanner to include this
+Emergency.appName = 'Emergency Portal';  // Display name
+Emergency.style_id = 'A4';              // Fixed: was styleId, now style_id ✓
+
 export default Emergency;
