@@ -24,3 +24,5 @@ jobs:
                    # Using -rf to ensure the build directory is overwritten without prompts
                    sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/
                    sudo systemctl reload nginx
+                   # Restart the backend to apply Node.js changes
+                   pm2 restart all
