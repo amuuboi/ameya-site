@@ -4,7 +4,7 @@ import './Apps.css';
 const Apps = () => {
     // Scans the 'App' directory specifically
     // Ensure your folder is named 'App' and sits next to Apps.js
-    const appFiles = require.context('./App', true, /\.js$/);
+    const appFiles = require.context('./Apps', true, /\.js$/);
 
     const automatedAppRegistry = useMemo(() => {
         return appFiles.keys()
