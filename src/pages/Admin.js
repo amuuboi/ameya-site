@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
   const [status, setStatus] = useState('');
+  const navigate = useNavigate();
+
+  // This checks if you have a token as soon as the page loads.
+  // If not, it kicks you to the login page immediately.
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleDeploy = async () => {
     const token = localStorage.getItem('adminToken');
-    if (!token) return setStatus('Not logged in!');
+    
+    // Safety check right before deploying
+    if (!token) {
+      navigate('/login');
+      return;
+    }
 
     setStatus('Deployment triggered...');
     
@@ -18,6 +34,14 @@ const Admin = () => {
       });
 
       const data = await response.json();
+
+      // If the backend explicitly says the session is expired or returns an auth error (401/403)
+      if (response.status === 401 || response.status === 403 || data.error === 'Session expired' || data.message === 'Session expired') {
+        localStorage.removeItem('adminToken'); // Trash the expired passport
+        navigate('/login'); // Send back to the login page
+        return;
+      }
+
       setStatus(data.message || data.error);
     } catch (err) {
       setStatus('Network error occurred.');
