@@ -5,17 +5,17 @@
     gap: 40px;
     justify-content: center;
     padding: 20px;
-    perspective: 1000px; /* For 3D depth */
+    perspective: 1000px;
 }
 
-/* ISO Container Base Logic (L/W = 1.41421) */
+/* ISO Container Base Logic */
 .iso-container {
     background: #ffffff;
     border-radius: 4px;
     position: relative;
     box-shadow: 
         5px 5px 0px rgba(0,0,0,0.1), 
-        15px 15px 25px rgba(0,0,0,0.15); /* 3D "Stacked" look */
+        15px 15px 25px rgba(0,0,0,0.15);
     transition: transform 0.3s ease;
     border: 1px solid #ddd;
     overflow: hidden;
@@ -27,20 +27,21 @@
     transform: translateY(-10px) rotateX(5deg);
 }
 
-/* Sizing based on ISO Standards */
-.A3 { width: 420px; aspect-ratio: 1 / 1.4142; }
-.A4 { width: 297px; aspect-ratio: 1 / 1.4142; }
-.A5 { width: 210px; aspect-ratio: 1 / 1.4142; }
+/* Sizing based on ISO ID Standards */
+/* Standard ISO ratio used: 1:1.4142 */
+.A3 { width: 420px; min-height: 594px; }
+.A4 { width: 297px; min-height: 420px; } /* Your standard session size */
+.A5 { width: 210px; min-height: 297px; }
 
-/* Label on Top */
 .iso-header {
     background: #282c34;
     color: #61dafb;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding: 5px 10px;
     text-align: right;
     letter-spacing: 2px;
+    border-bottom: 1px solid #444;
 }
 
 .iso-content {
@@ -48,26 +49,35 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    color: #333;
 }
 
-/* Form Styles */
+.app-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #61dafb;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* Form Styling within ISO Content */
 .secret-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .btn-primary {
     background: #282c34;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px;
     cursor: pointer;
     border-radius: 4px;
     width: 100%;
+    transition: 0.2s;
 }
 
 .btn-primary:hover {
