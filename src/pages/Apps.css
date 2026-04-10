@@ -1,0 +1,76 @@
+/* Container Layout */
+.apps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+    perspective: 1000px; /* For 3D depth */
+}
+
+/* ISO Container Base Logic (L/W = 1.41421) */
+.iso-container {
+    background: #ffffff;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 
+        5px 5px 0px rgba(0,0,0,0.1), 
+        15px 15px 25px rgba(0,0,0,0.15); /* 3D "Stacked" look */
+    transition: transform 0.3s ease;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.iso-container:hover {
+    transform: translateY(-10px) rotateX(5deg);
+}
+
+/* Sizing based on ISO Standards */
+.A3 { width: 420px; aspect-ratio: 1 / 1.4142; }
+.A4 { width: 297px; aspect-ratio: 1 / 1.4142; }
+.A5 { width: 210px; aspect-ratio: 1 / 1.4142; }
+
+/* Label on Top */
+.iso-header {
+    background: #282c34;
+    color: #61dafb;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    text-align: right;
+    letter-spacing: 2px;
+}
+
+.iso-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+/* Form Styles */
+.secret-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background: #282c34;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background: #61dafb;
+    color: #282c34;
+}
