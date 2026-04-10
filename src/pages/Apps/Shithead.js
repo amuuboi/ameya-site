@@ -59,7 +59,7 @@ const Shithead = ({ onLaunch }) => {
 // ── Auto-detection metadata ────────────────────────────────────────────────────
 Shithead.appName     = 'Shithead';           // Display name in card header
 Shithead.style_id    = 'A4';                 // ISO card size (A3 / A4 / A5)
-Shithead.external_url = 'https://game.ameyabhat.me'; // Triggers modal behaviour
+Shithead.external_url = 'https://shithead.ameyabhat.me'; // Triggers modal behaviour
 
 export default Shithead;
 
