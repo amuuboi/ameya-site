@@ -43,7 +43,7 @@ const Emergency = () => {
                 <form onSubmit={handlePasswordSubmit}>
                     <input
                         type="password"
-                        placeholder="Enter Password"
+                        placeholder="Enter Maoma Last"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="secret-input"
