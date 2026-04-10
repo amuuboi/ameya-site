@@ -37,7 +37,7 @@ const Apps = () => {
     return (
         <main className="container">
             <div className="apps-page">
-                <h1>System Dashboard</h1>
+                <h1>Apps Dashboard</h1>
                 <div className="apps-grid">
                     {automatedAppRegistry.map((app, index) => (
                         <div key={index} className={`iso-container ${app.layoutClass}`}>
