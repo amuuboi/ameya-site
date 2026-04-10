@@ -77,6 +77,19 @@ app.post('/api/emergency-contacts', (req, res) => {
     res.status(401).json({ success: false, message: "Wrong password" });
 });
 
+//Emergency Contact
+app.post('/api/emergency-contacts', (req, res) => {
+    const { password } = req.body;
+    // IMPORTANT: Use console.log so we can see it in pm2 logs!
+    console.log("Attempting emergency login with:", password); 
+
+    if (password === process.env.EMERGENCY_PW) {
+        const contacts = JSON.parse(process.env.CONTACT_DATA);
+        return res.json({ success: true, contacts });
+    }
+    res.status(401).json({ success: false, message: "Wrong password" });
+});
+
 app.listen(5000, () => {
     console.log("Server running on port 5000");
 });
