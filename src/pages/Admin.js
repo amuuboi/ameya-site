@@ -19,7 +19,7 @@ const Admin = () => {
     
     // Safety check right before deploying
     if (!token) {
-      navigate('/login');
+      navigate('/ameya-login');
       return;
     }
 
