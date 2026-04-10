@@ -1,4 +1,4 @@
-/* Container Layout */
+/* ─── Container Layout ──────────────────────────────────────────────────────── */
 .apps-grid {
     display: flex;
     flex-wrap: wrap;
@@ -8,15 +8,15 @@
     perspective: 1000px;
 }
 
-/* ISO Container Base Logic */
+/* ─── ISO Container Base ────────────────────────────────────────────────────── */
 .iso-container {
     background: #ffffff;
     border-radius: 4px;
     position: relative;
-    box-shadow: 
-        5px 5px 0px rgba(0,0,0,0.1), 
+    box-shadow:
+        5px 5px 0px rgba(0,0,0,0.1),
         15px 15px 25px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #ddd;
     overflow: hidden;
     display: flex;
@@ -25,14 +25,25 @@
 
 .iso-container:hover {
     transform: translateY(-10px) rotateX(5deg);
+    box-shadow:
+        5px 5px 0px rgba(0,0,0,0.12),
+        20px 20px 35px rgba(0,0,0,0.2);
 }
 
-/* Sizing based on ISO ID Standards */
-/* Standard ISO ratio used: 1:1.4142 */
+/* Clickable external card gets a subtle ring on hover */
+.iso-container[style*="cursor: pointer"]:hover {
+    box-shadow:
+        5px 5px 0px rgba(97,218,251,0.2),
+        20px 20px 35px rgba(0,0,0,0.2),
+        0 0 0 2px #61dafb;
+}
+
+/* ─── ISO Size Standards (ratio 1:√2) ──────────────────────────────────────── */
 .A3 { width: 420px; min-height: 594px; }
-.A4 { width: 297px; min-height: 420px; } /* Your standard session size */
+.A4 { width: 297px; min-height: 420px; }
 .A5 { width: 210px; min-height: 297px; }
 
+/* ─── ISO Header ────────────────────────────────────────────────────────────── */
 .iso-header {
     background: #282c34;
     color: #61dafb;
@@ -42,8 +53,23 @@
     text-align: right;
     letter-spacing: 2px;
     border-bottom: 1px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
+.external-badge {
+    background: #61dafb;
+    color: #282c34;
+    font-size: 0.55rem;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+}
+
+/* ─── ISO Content ───────────────────────────────────────────────────────────── */
 .iso-content {
     padding: 20px;
     flex-grow: 1;
@@ -59,7 +85,7 @@
     width: fit-content;
 }
 
-/* Form Styling within ISO Content */
+/* ─── Shared form styles (used by Emergency, etc.) ──────────────────────────── */
 .secret-input {
     width: 100%;
     padding: 10px;
@@ -77,10 +103,109 @@
     cursor: pointer;
     border-radius: 4px;
     width: 100%;
-    transition: 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 
 .btn-primary:hover {
     background: #61dafb;
     color: #282c34;
+}
+
+/* ─── Fullscreen Modal Overlay ──────────────────────────────────────────────── */
+.app-modal-overlay {
+    position: fixed;
+    inset: 0;                          /* top/right/bottom/left: 0 */
+    background: rgba(20, 22, 28, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.app-modal-frame {
+    width: calc(100vw - 48px);
+    height: calc(100vh - 48px);
+    max-width: 1400px;
+    background: #1a1d23;
+    border-radius: 6px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+    animation: modalSlideIn 0.25s ease;
+}
+
+@keyframes modalSlideIn {
+    from { transform: scale(0.96) translateY(12px); opacity: 0; }
+    to   { transform: scale(1)    translateY(0);    opacity: 1; }
+}
+
+/* Modal top bar */
+.app-modal-header {
+    background: #282c34;
+    border-bottom: 1px solid #444;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.app-modal-title {
+    color: #61dafb;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.app-modal-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.app-modal-btn {
+    background: none;
+    border: 1px solid #444;
+    color: #aaa;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.app-modal-btn:hover {
+    background: #61dafb;
+    color: #282c34;
+    border-color: #61dafb;
+}
+
+.close-btn:hover {
+    background: #e55;
+    color: #fff;
+    border-color: #e55;
+}
+
+/* The iframe fills all remaining space */
+.app-modal-iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    display: block;
+    background: #000;
 }
