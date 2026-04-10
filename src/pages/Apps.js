@@ -1,63 +1,53 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
+import './Apps.css'; 
 
 const Apps = () => {
-    const [password, setPassword] = useState('');
-    const [contacts, setContacts] = useState([]);
-    const [showContacts, setShowContacts] = useState(false);
+    // Scans the 'App' directory specifically
+    // Ensure your folder is named 'App' and sits next to Apps.js
+    const appFiles = require.context('./App', true, /\.js$/);
 
-    const handlePasswordSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('/api/emergency-contacts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password })
-            });
-            const data = await response.json();
-            if (data.success) {
-                setContacts(data.contacts);
-                setShowContacts(true);
-            } else {
-                alert("Wrong password");
-            }
-        } catch (err) {
-            console.error("Error fetching contacts");
-        }
-    };
+    const automatedAppRegistry = useMemo(() => {
+        return appFiles.keys()
+            .map((fileName) => {
+                const module = appFiles(fileName);
+                const Component = module.default;
+                
+                // If it's a valid React component, we treat it as an app
+                if (Component) {
+                    // Clean up filename to create the App Name
+                    // e.g., "./Emergency.js" -> "Emergency"
+                    // e.g., "./Calculator/index.js" -> "Calculator"
+                    const rawName = fileName.split('/').pop().replace('.js', '');
+                    const displayName = rawName === 'index' 
+                        ? fileName.split('/')[1] 
+                        : rawName;
+
+                    return {
+                        name: displayName,
+                        Component: Component,
+                        // Fallback to A4 if style_id is missing
+                        layoutClass: Component.style_id || 'A4'
+                    };
+                }
+                return null;
+            })
+            .filter(Boolean);
+    }, [appFiles]);
 
     return (
         <main className="container">
             <div className="apps-page">
-                <h1>Apps</h1>
-                <div className="app-card">
-                    <h2>Emergency Contact</h2>
-                    <div className="app-ui">
-                        {showContacts ? (
-                            <div className="contact-data">
-                                {contacts.map((c, index) => (
-                                    <p key={index}><strong>{c.name}</strong> - {c.num}</p>
-                                ))}
-                                <button 
-                                    onClick={() => { setShowContacts(false); setPassword(''); }} 
-                                    className="btn-primary"
-                                >
-                                    Lock
-                                </button>
+                <h1>System Dashboard</h1>
+                <div className="apps-grid">
+                    {automatedAppRegistry.map((app, index) => (
+                        <div key={index} className={`iso-container ${app.layoutClass}`}>
+                            <div className="iso-header">{app.layoutClass}</div>
+                            <div className="iso-content">
+                                <h2 className="app-title">{app.name}</h2>
+                                <app.Component />
                             </div>
-                        ) : (
-                            <form onSubmit={handlePasswordSubmit}>
-                                <input 
-                                    type="password"
-                                    placeholder="Enter Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="secret-input"
-                                    style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
-                                />
-                                <button type="submit" className="btn-primary">View Contacts</button>
-                            </form>
-                        )}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </main>
