@@ -17,12 +17,16 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 2205
           script: |
-                   cd ~/ameya-site
-                   git pull origin main
-                   npm install
-                   npm run build
-                   # Using -rf to ensure the build directory is overwritten without prompts
-                   sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/
-                   sudo systemctl reload nginx
-                   # Restart the backend to apply Node.js changes
-                   pm2 restart ameya-api
+                  cd ~/ameya-site
+                  git pull origin main
+                  npm install
+                  npm run build
+        
+                  # 1. Update Frontend Files
+                  sudo cp -rf build/* /var/www/ameyabhat.me/ameya-site/build/
+                  sudo systemctl reload nginx
+        
+                  # 2. Update and Restart Backend
+                  cd backend  # Navigates to where your Node.js code lives
+                  npm install --production
+                  pm2 restart ameya-api || pm2 start index.js --name "ameya-api"
