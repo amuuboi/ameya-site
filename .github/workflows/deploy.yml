@@ -19,7 +19,6 @@ jobs:
           script: |
                   cd ~/ameya-site
                   git pull origin main
-                  npm install
                   npm run build
         
                   # 1. Update Frontend Files
@@ -28,5 +27,4 @@ jobs:
         
                   # 2. Update and Restart Backend
                   cd backend  # Navigates to where your Node.js code lives
-                  npm install --production
                   pm2 restart ameya-api || pm2 start index.js --name "ameya-api"
