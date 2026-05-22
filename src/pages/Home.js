@@ -6,9 +6,9 @@ const Home = () => {
   return (
     <main className="container main-content">
       <section className="hero">
-        <h1>Welcome</h1>
+        <h1>Hello!</h1>
         <p>
-          This is the central hub for my projects and professional background. 
+          Know about me and My Projects on this website! 
           Select a section above to learn more.
         </p>
         <div className="hero-buttons">
